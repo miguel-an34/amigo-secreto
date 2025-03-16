@@ -30,20 +30,37 @@ function sortear() {
     let sorteio = [...participantes];
     let resultado = {};
 
-    for (let i = 0; i < participantes.length; i++) {
-        let sorteado;
-        do {
-            sorteado = sorteio[Math.floor(Math.random() * sorteio.length)];
-        } while (sorteado === participantes[i] || resultado[sorteado]);
+    // Embaralha a lista para evitar sorteios previsíveis
+    sorteio = embaralharArray(sorteio);
 
-        resultado[participantes[i]] = sorteado;
-        sorteio.splice(sorteio.indexOf(sorteado), 1);
+    for (let i = 0; i < participantes.length; i++) {
+        let amigo;
+        if (i === participantes.length - 1) {
+            amigo = sorteio[0]; // Último participante pega o primeiro
+        } else {
+            amigo = sorteio[i + 1];
+        }
+        resultado[participantes[i]] = amigo;
     }
 
+    exibirResultado(resultado);
+}
+
+function embaralharArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function exibirResultado(resultado) {
     let resultadoDiv = document.getElementById("resultado");
     resultadoDiv.innerHTML = "<h3>Resultado do Sorteio:</h3>";
+    
     for (let chave in resultado) {
         resultadoDiv.innerHTML += `<p>${chave} → ${resultado[chave]}</p>`;
     }
+    
     resultadoDiv.style.display = "block";
 }
