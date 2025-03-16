@@ -16,6 +16,11 @@ body {
     height: 100vh;
     flex-direction: column;
 }
+/* imagem */
+body {
+    background: url('images (6).jpeg') no-repeat center center fixed;
+    background-size: cover;
+}
 
 /* Container principal */
 .container {
