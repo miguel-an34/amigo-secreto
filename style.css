@@ -1,24 +1,86 @@
-body {
+/* Reset básico para remover margens e paddings padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
+}
+
+/* Corpo da página */
+body {
+    background-color: #f4f4f4;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    flex-direction: column;
 }
+
+/* Container principal */
 .container {
     background: white;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
     text-align: center;
 }
-button {
-    margin: 10px;
-    padding: 10px;
-    cursor: pointer;
+
+/* Título */
+h1 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #444;
 }
-ul {
+
+/* Input e botão */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Lista de participantes */
+#lista-participantes {
+    margin-top: 15px;
     list-style: none;
-    padding: 0;
+}
+
+#lista-participantes li {
+    background: #e9ecef;
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Resultado */
+#resultado {
+    margin-top: 15px;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    display: none;
 }
