@@ -1,4 +1,4 @@
-/* Reset básico para remover margens e paddings padrão */
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -6,9 +6,10 @@
     font-family: Arial, sans-serif;
 }
 
-/* Corpo da página */
+/* Corpo da página com imagem de fundo */
 body {
-    background-color: #f4f4f4;
+    background: url('images (6).jpeg') no-repeat center center fixed;
+    background-size: cover;
     color: #333;
     display: flex;
     justify-content: center;
@@ -16,15 +17,10 @@ body {
     height: 100vh;
     flex-direction: column;
 }
-/* imagem */
-body {
-    background: url('images (6).jpeg') no-repeat center center fixed;
-    background-size: cover;
-}
 
-/* Container principal */
+/* Container */
 .container {
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -40,7 +36,7 @@ h1 {
     color: #444;
 }
 
-/* Input e botão */
+/* Inputs e botões */
 input {
     width: 100%;
     padding: 10px;
@@ -59,6 +55,7 @@ button {
     cursor: pointer;
     font-size: 16px;
     width: 100%;
+    margin-top: 5px;
 }
 
 button:hover {
