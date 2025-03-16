@@ -1,52 +1,60 @@
-let participantes = [];
+document.addEventListener('DOMContentLoaded', () => {
+    const participantesInput = document.getElementById('input-participante');
+    const participantesList = document.getElementById('lista-participantes');
+    const sorteioButton = document.getElementById('btn-sorteio');
+    const resultadoContainer = document.getElementById('resultado');
+    const resultadoList = document.getElementById('resultado-lista');
+    const participantes = [];
 
-function adicionarNome() {
-    let nome = document.getElementById('nome').value.trim();
-    if (nome && !participantes.includes(nome)) {
-        participantes.push(nome);
-        atualizarLista();
-        document.getElementById('nome').value = '';
-    } else {
-        alert('Nome inválido ou já adicionado!');
-    }
-}
-
-function atualizarLista() {
-    let lista = document.getElementById('lista');
-    lista.innerHTML = '';
-    participantes.forEach(nome => {
-        let li = document.createElement('li');
-        li.textContent = nome;
-        lista.appendChild(li);
-    });
-}
-
-function sortear() {
-    if (participantes.length < 2) {
-        alert('Adicione pelo menos 2 participantes!');
-        return;
-    }
-    
-    let sorteio = [...participantes];
-    let resultado = {};
-
-    for (let i = 0; i < participantes.length; i++) {
-        let disponiveis = sorteio.filter(n => n !== participantes[i]);
-        if (disponiveis.length === 0) {
-            return alert('Erro ao sortear, tente novamente!');
+    // Função para adicionar participantes
+    function adicionarParticipante(nome) {
+        if (nome && !participantes.includes(nome)) {
+            participantes.push(nome);
+            const li = document.createElement('li');
+            li.textContent = nome;
+            participantesList.appendChild(li);
+            participantesInput.value = ''; // Limpar campo de input
         }
-        let escolhido = disponiveis[Math.floor(Math.random() * disponiveis.length)];
-        resultado[participantes[i]] = escolhido;
-        sorteio.splice(sorteio.indexOf(escolhido), 1);
     }
 
-    exibirResultado(resultado);
-}
+    // Função para sortear os amigos secretos
+    function sortearAmigosSecretos() {
+        if (participantes.length < 2) {
+            alert('Adicione pelo menos dois participantes para fazer o sorteio!');
+            return;
+        }
 
-function exibirResultado(resultado) {
-    let div = document.getElementById('resultado');
-    div.innerHTML = '<h2>Resultado do Sorteio</h2>';
-    for (let [amigo, sorteado] of Object.entries(resultado)) {
-        div.innerHTML += `<p>${amigo} → ${sorteado}</p>`;
+        const sorteio = [...participantes];
+        const pares = [];
+
+        // Realizando o sorteio
+        for (let i = 0; i < participantes.length; i++) {
+            const sorteado = sorteio.splice(Math.floor(Math.random() * sorteio.length), 1)[0];
+            pares.push({ amigo: participantes[i], sorteado: sorteado });
+        }
+
+        // Exibindo os resultados
+        mostrarResultados(pares);
     }
-}
+
+    // Função para mostrar os resultados
+    function mostrarResultados(pares) {
+        resultadoList.innerHTML = ''; // Limpar resultados anteriores
+        pares.forEach(par => {
+            const li = document.createElement('li');
+            li.textContent = `${par.amigo} tirou ${par.sorteado}`;
+            resultadoList.appendChild(li);
+        });
+        resultadoContainer.style.display = 'block';
+    }
+
+    // Adicionando evento para o botão de adicionar participantes
+    participantesInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            adicionarParticipante(participantesInput.value.trim());
+        }
+    });
+
+    // Adicionando evento para o botão de sorteio
+    sorteioButton.addEventListener('click', sortearAmigosSecretos);
+});
